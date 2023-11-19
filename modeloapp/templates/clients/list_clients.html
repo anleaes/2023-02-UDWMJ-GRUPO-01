@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    Lista de Clientes - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <br />
+        <h5><b>Lista de Clientes</b></h5>
+        <div class="row">
+            <div class ="col-md-12">
+                <br />
+                    <a href="{% url 'clients:add_client' %}">Cadastro de novo cliente</a>
+                <br />
+                <br />
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Sobrenome</th>
+                    <th scope="col">Endereco</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Genero</th>
+                    <th scope="col">Redes sociais</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                        <tr>
+                            <th scope="row">{{ client.id }}</th>
+                            <td>{{ client.first_name }}</td>
+                            <td>{{ client.last_name }}</td>
+                            <td>{{ client.address }}</td>
+                            <td>{{ client.cell_phone }}</td>
+                            <td>{{ client.email }}</td>
+                            <td>{{ client.gender }}</td>
+                            <td>
+                                {% for client_socialnetwork in client_socialnetworks %}
+                                    {% if client_socialnetwork.client_id == client.id %}
+                                        <li>{{ client_socialnetwork.socialnetwork }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{% url 'clients:edit_client' client.id %}" class="btn btn-primary btn-sm">Editar</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'clients:delete_client' client.id %}" class="btn btn-danger btn-sm ">Excluir</a>
+                            </td>
+                            <td>   
+                                 <a href="{% url 'orders:add_order' client.id %}" class="btn btn-danger btn-sm ">Pedir</a>
+                            </td>
+                        </tr> 
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
