@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    Lista de Produtos - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <br />
+        <h5><b>Lista de Produtos</b></h5>
+        <div class="row">
+            <div class ="col-md-12">
+                <br />
+                    <a href="{% url 'products:add_product' %}">Cadastro de novo produto</a>
+                <br />
+                <br />
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descricao</th>
+                    <th scope="col">Data de fabricacao</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Documento</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <th scope="row">{{ product.id }}</th>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.description }}</td>
+                            <td>{{ product.date_fabrication }}</td>
+                            <td>
+                                {% if product.is_active == True %}
+                                    Ativo
+                                {% endif %}
+                                {% if product.is_active == False %}
+                                    Inativo
+                                {% endif %}
+                            </td>
+                            <td>{{ product.category }}</td>
+                            <td>
+                                <img src="{{ product.photo.url }}" width="50" height="50">
+                            </td>
+                            <td>
+                                <a href="{{ product.doc.url }}" >{{ product.doc.url }}</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'products:edit_product' product.id %}" class="btn btn-primary btn-sm">Editar</a>
+                            </td>
+                            <td>    
+                                <a href="{% url 'products:delete_product' product.id %}" class="btn btn-danger btn-sm ">Excluir</a>
+                            </td>
+                        </tr> 
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
