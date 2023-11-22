@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    Lista de Pedidos - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <br />
+        <h5><b>Lista de Pedidos</b></h5>
+        <div class="row">
+            <div class ="col-md-12">
+            <br />
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Preco Total</th>
+                    <th scope="col">Itens de pedido</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <th scope="row">
+                                {% if order.status == 'Finalizado' or order.status == 'Cancelado' %}
+                                    <p style="color:darkgray;" >{{ order.id }}</p>
+                                {% else %}
+                                    {{ order.id }}
+                                {% endif %}
+                            </th>
+                            <td>
+                                {% if order.status == 'Finalizado' or order.status == 'Cancelado' %}
+                                    <p style="color:darkgray;" >{{ order.status }}</p>
+                                {% else %}
+                                    {{ order.status }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% for client in clients %}
+                                    {% if order.client_id == client.id %}
+                                        {% if order.status == 'Finalizado' or order.status == 'Cancelado' %}
+                                            <p style="color:darkgray;" >{{ client.first_name }} {{ client.last_name }}</p>
+                                        {% else %}
+                                            {{ client.first_name }} {{ client.last_name }}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}   
+                            </td>
+                            <td>
+                                {% if order.status == 'Finalizado' or order.status == 'Cancelado' %}
+                                    <p style="color:darkgray;" >R$ {{ order.total_price }}</p>
+                                {% else %}
+                                    R$ {{ order.total_price }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if order.status == 'Finalizado' or order.status == 'Cancelado' %}
+                                    <a href="#" class="btn btn-primary btn-sm disabled">Adicionar itens</a>
+                                {% else %}
+                                    <a href="{% url 'orders:add_order_item' order.id %}" class="btn btn-primary btn-sm">Adicionar itens</a>
+                                {% endif %}
+                                <br /><br />
+                                {% for order_item in order_items %}
+                                    {% if order_item.order_id == order.id %}
+                                        Produto: {{ order_item.product}}<br /> 
+                                        Quantidade: {{ order_item.quantity}}<br />
+                                        Valor Unitario: R$ {{ order_item.unitary_price }}<br />
+                                        <a href="{% url 'orders:delete_order_item' order_item.id %}">Excluir Item</a><br /><br />
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{% url 'orders:edit_order_status' order.id %}" class="btn btn-danger btn-sm ">Alterar Status</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'orders:delete_order' order.id %}" class="btn btn-danger btn-sm ">Excluir</a>
+                            </td>
+                        </tr> 
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

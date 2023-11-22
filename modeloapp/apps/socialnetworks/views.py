@@ -2,8 +2,11 @@ from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import SocialnetworkForm
 from .models import Socialnetwork
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+@login_required(login_url='/contas/login/')
 def add_socialnetwork(request):
     template_name = 'socialnetworks/add_socialnetwork.html'
     context = {}
@@ -26,6 +29,7 @@ def list_socialnetworks(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def edit_socialnetwork(request, id_socialnetwork):
     template_name = 'socialnetworks/add_socialnetwork.html'
     context ={}
@@ -39,6 +43,7 @@ def edit_socialnetwork(request, id_socialnetwork):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def delete_socialnetwork(request, id_socialnetwork):
     socialnetwork = Socialnetwork.objects.get(id=id_socialnetwork)
     socialnetwork.delete()

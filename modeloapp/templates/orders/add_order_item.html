@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+
+    Adicionar Item de Pedido - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <br />
+    <h5><b>Adicionar Item de Pedido</b></h5>
+        <div class="row">
+            <div class ="col-md-12">
+                <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.quantity.id_for_label }}">Quantidade</label>
+                    {{ form.quantity|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.unitary_price.id_for_label }}">Preco Unitario</label>
+                    {{ form.unitary_price|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.product.id_for_label }}">Produto</label>
+                    {{ form.product|add_class:"form-control" }}
+                </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>       
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
