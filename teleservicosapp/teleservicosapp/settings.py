@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'core.apps.CoreConfig',
     'accounts.apps.AccountsConfig',
+    'clients.apps.ClientsConfig',
+    'materiais.apps.MateriaisConfig',
 ]
 
 MIDDLEWARE = [
