@@ -35,10 +35,10 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'core.apps.CoreConfig',
     'categories.apps.CategoriesConfig',
-    'clients.apps.ClientsConfig'
     'orders.apps.OrdersConfig',
     'products.apps.ProductsConfig',
     'materiais.apps.MateriaisConfig',
+    'clients.apps.ClientsConfig',
     'profissionais.apps.ProfissionaisConfig',
 ]
 
