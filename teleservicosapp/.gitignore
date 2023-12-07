@@ -1,3 +1,4 @@
 db.sqlite3
 teleservicosapp/__pycache__/*
 apps/core/__pycache__/*
+apps/categories/__pycache__/*
