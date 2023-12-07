@@ -1,7 +1,0 @@
-.env
-db.sqlite3
-teleservicosapp/__pycache__/*
-apps/accounts/__pycache__/*
-apps/clients/__pycache__/*
-apps/core/__pycache__/*
-apps/materials/__pycache__/*
