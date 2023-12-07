@@ -14,7 +14,7 @@
         <div class="row">
             <div class ="col-md-12">
                 <br />
-                <a href="{% url 'profissional:add_profissional' %}">Cadastro de novo profissional</a>
+                    <a href="{% url 'profissional:add_profissional' %}">Cadastro de novo profissional</a>
                 <br />
                 <br />
                 <table class="table table-hover">
@@ -22,43 +22,38 @@
                     <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">Descricao</th>
-                    <th scope="col">Data de fabricacao</th>
-                    <th scope="col">Ativo</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Documento</th>
+                    <th scope="col">Sobrenome</th>
+                    <th scope="col">Endereco</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Genero</th>
+                    <th scope="col">Tipo de profissional</th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for product in products %}
+                    {% for profissional in profissionais %}
                         <tr>
-                            <th scope="row">{{ product.id }}</th>
-                            <td>{{ product.name }}</td>
-                            <td>{{ product.description }}</td>
-                            <td>{{ product.date_fabrication }}</td>
-                            <td>
-                                {% if product.is_active == True %}
-                                    Ativo
-                                {% endif %}
-                                {% if product.is_active == False %}
-                                    Inativo
-                                {% endif %}
-                            </td>
-                            <td>{{ product.category }}</td>
-                            <td>
-                                <img src="{{ product.photo.url }}" width="50" height="50">
+                            <th scope="row">{{ profissional.id }}</th>
+                            <td>{{ profissional.first_name }}</td>
+                            <td>{{ profissional.last_name }}</td>
+                            <td>{{ profissional.address }}</td>
+                            <td>{{ profissional.cell_phone }}</td>
+                            <td>{{ profissional.email }}</td>
+                            <td>{{ profissional.gender }}</td>
+                            <td>{{ profissional.tipo_de_profissional }}</td>
+                                {% endfor %}
                             </td>
                             <td>
-                                <a href="{{ product.doc.url }}" >{{ product.doc.url }}</a>
+                                <a href="{% url 'profissional:edit_profissional' profissional.id %}" class="btn btn-primary btn-sm">Editar</a>
                             </td>
                             <td>
-                                <a href="{% url 'products:edit_product' product.id %}" class="btn btn-primary btn-sm">Editar</a>
+                                <a href="{% url 'profissional:delete_profissional' profissional.id %}" class="btn btn-danger btn-sm ">Excluir</a>
                             </td>
-                            <td>    
-                                <a href="{% url 'products:delete_product' product.id %}" class="btn btn-danger btn-sm ">Excluir</a>
+                            <td>   
+                                 <a href="{% url 'orders:add_order' client.id %}" class="btn btn-danger btn-sm ">Pedir</a>
                             </td>
                         </tr> 
                     {% endfor %}
