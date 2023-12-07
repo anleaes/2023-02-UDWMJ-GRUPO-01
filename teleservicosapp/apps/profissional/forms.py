@@ -6,3 +6,4 @@ class ProfissionalForm(forms.ModelForm):
     class Meta:
         model = Profissional
         exclude = ('created_on' , 'updated_on',)
+        
