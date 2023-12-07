@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'clients.apps.ClientsConfig'
     'orders.apps.OrdersConfig',
     'materiais.apps.MateriaisConfig',
+    'profissionais.apps.ProfissionaisConfig',
 ]
 
 MIDDLEWARE = [
