@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <title>{% block title %}Nome do meu App{% endblock title %}</title>
+    <title>{% block title %}Tele Serviços{% endblock title %}</title>
 </head>
 <body>
     <!-- INICIO: Bloco do Bootstrap a ser incluido -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Nome do meu App</a>
+        <a class="navbar-brand" href="/">Tele Serviços</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,7 +27,8 @@
                         <a class="dropdown-item" href="{% url 'cliente:list_client' %}">Clientes</a>
                         <a class="dropdown-item" href="{% url 'atendimentos:list_atendimentos' %}">Pedidos</a>
                         <a class="dropdown-item" href="{% url 'materiais:list_materiais' %}">Materiais</a>
-                        <a class="dropdown-item" href="{% url 'categories:list_categories' %}">Categorias</a>
+                        {% url 'tiposdeprofissional:list_tiposdeprofissional' %}
+                        <a class="dropdown-item" href="{% url 'tiposdeprofissional:list_tiposdeprofissional' %}">Tipos de Profissional</a>
                         <a class="dropdown-item" href="{% url 'socialnetworks:list_socialnetworks' %}">Redes Sociais</a>
                     </div>
                 </li>
