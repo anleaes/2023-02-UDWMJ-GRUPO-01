@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    Lista de Profissionais - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <br />
+        <h5><b>Lista de Profissionais</b></h5>
+        <div class="row">
+            <div class ="col-md-12">
+                <br />
+                    <a href="{% url 'profissionais:add_profissionais' %}">Cadastro de novo profissional</a>
+                <br />
+                <br />
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Sobrenome</th>
+                    <th scope="col">Endereco</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Genero</th>
+                    <th scope="col">Tipo de profissional</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for profissional in profissionais %}
+                        <tr>
+                            <th scope="row">{{ profissionais.id }}</th>
+                            <td>{{ profissionais.first_name }}</td>
+                            <td>{{ profissionais.last_name }}</td>
+                            <td>{{ profissionais.address }}</td>
+                            <td>{{ profissionais.cell_phone }}</td>
+                            <td>{{ profissionais.email }}</td>
+                            <td>{{ profissionais.gender }}</td>
+                            <td>{{ profissionais.tipo_de_profissional }}</td>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{% url 'profissionais:edit_profissionais' profissionais.id %}" class="btn btn-primary btn-sm">Editar</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'profissionais:delete_profissionais' profissionais.id %}" class="btn btn-danger btn-sm ">Excluir</a>
+                            </td>
+                            <td>   
+                                 <a href="{% url 'orders:add_order' client.id %}" class="btn btn-danger btn-sm ">Pedir</a>
+                            </td>
+                        </tr> 
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

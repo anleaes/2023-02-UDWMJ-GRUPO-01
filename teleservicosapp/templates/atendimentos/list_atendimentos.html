@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    Lista de Atendimentos - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <br />
+        <h5><b>Lista de Atendimentos</b></h5>
+        <div class="row">
+            <div class ="col-md-12">
+            <br />
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Cliente</th>
+                    <!--profissional,servico -->
+                    <th scope="col">Preco Total</th>
+                    <th scope="col">Materiais de Atendimento</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for atendimento in atendimentos %}
+                        <tr>
+                            <th scope="row">
+                                {% if atendimento.status == 'Finalizado' or atendimento.status == 'Cancelado' %}
+                                    <p style="color:darkgray;" >{{ atendimento.id }}</p>
+                                {% else %}
+                                    {{ atendimento.id }}
+                                {% endif %}
+                            </th>
+                            <td>
+                                {% if atendimento.status == 'Finalizado' or atendimento.status == 'Cancelado' %}
+                                    <p style="color:darkgray;" >{{ atendimento.status }}</p>
+                                {% else %}
+                                    {{ atendimento.status }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% for client in clients %}
+                                    {% if atendimento.client_id == atendimento.id %}
+                                        {% if atendimento.status == 'Finalizado' or atendimento.status == 'Cancelado' %}
+                                            <p style="color:darkgray;" >{{ client.first_name }} {{ client.last_name }}</p>
+                                        {% else %}
+                                            {{ client.first_name }} {{ client.last_name }}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}   
+                            </td>
+                            <td> 
+                                {% if atendimento.status == 'Finalizado' or atendimento.status == 'Cancelado' %}
+                                    <p style="color:darkgray;" >R$ {{ atendimento.total_price }}</p>
+                                {% else %}
+                                    R$ {{ atendimento.total_price }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if atendimento.status == 'Finalizado' or atendimento.status == 'Cancelado' %}
+                                    <a href="#" class="btn btn-primary btn-sm disabled">Adicionar Materiais</a>
+                                {% else %}
+                                    <a href="{% url 'atendimento:add_materiais_atendimento' atendimento.id %}" class="btn btn-primary btn-sm">Adicionar Materiais</a>
+                                {% endif %}
+                                <br /><br />
+                                {% for material_atendimento in material_atendimento %}
+                                    {% if material_atendimento.atendimento_id == atendimento.id %}
+                                        Material: {{ materiais_atendimento.material}}<br /> 
+                                        Quantidade: {{ materiais_atendimento.quantity}}<br />
+                                        Valor Unitario: R$ {{ materiais_atendimento.unitary_price }}<br />
+                                        <a href="{% url 'atendimento:delete_materiais_atendimento' materiais_atendimento.id %}">Excluir Material</a><br /><br />
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{% url 'atendimento:edit_atendimento_status' atendimento.id %}" class="btn btn-danger btn-sm ">Alterar Status</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'atendimento:delete_atendimento' atendimento.id %}" class="btn btn-danger btn-sm ">Excluir</a>
+                            </td>
+                        </tr> 
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
