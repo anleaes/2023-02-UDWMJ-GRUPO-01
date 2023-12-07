@@ -1,7 +1,7 @@
 from django.db import models
 from materiais.models import Materiais
 from clients.models import Client
-#import profissional
+from profissionais.models import Profissionais
 #import servico
 
 # Create your models here.
@@ -18,8 +18,8 @@ class Atendimentos(models.Model):
     status = models.CharField('Status', max_length=20, choices=STATUS_CHOICES, null=True, blank=True, default='Em andamento')
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     #materiais_atendimento = models.ForeignKey(MateriaisAtendimentoForm, through='materiais atendimentos', blank=True)
-    #profissional
-    #servico
+    profissionais = models.ForeignKey(Profissionais, on_delete=models.CASCADE)
+    servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Atendimento'
