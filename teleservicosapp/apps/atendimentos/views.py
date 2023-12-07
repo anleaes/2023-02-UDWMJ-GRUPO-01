@@ -23,7 +23,7 @@ def add_atendimento(request, id_client):
     context['form'] = form
     return render(request, template_name, context)
 
-def list_atendimento(request):
+def list_atendimentos(request):
     template_name = 'atendimentos/list_atendimentos.html'
     atendimento =   Atendimentos.objects.filter()
     materiaisatendimento = MateriaisAtendimentos.objects.filter()
