@@ -2,6 +2,7 @@ from django.db import models
 from materiais.models import Materiais
 from clients.models import Client
 from profissionais.models import Profissionais
+from servico.models import Servico
 #import servico
 
 # Create your models here.
