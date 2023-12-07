@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'materiais.apps.MateriaisConfig',
     'atendimento.apps.AtendimentoConfig',
     'profissional.apps.ProfissionalConfig',
+    'servicos.apps.ServicosConfig',
 ]
 
 MIDDLEWARE = [
