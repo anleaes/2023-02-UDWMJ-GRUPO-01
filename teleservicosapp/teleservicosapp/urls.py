@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='core')),
     path('categorias/', include('categories.urls', namespace='categories')),
+    path('clientes/', include('clients.urls', namespace='clients')),
+    path('pedidos/', include('orders.urls', namespace='orders')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
