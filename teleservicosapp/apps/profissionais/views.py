@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
-
-from teleservicosapp.apps import profissionais
+from django.contrib.auth.decorators import login_required
+import profissionais
 from .forms import ProfissionaisForm
 from .models import Profissionais
 
 # Create your views here.
 
+@login_required(login_url='/contas/login/')
 def add_profissionais(request):
     template_name = 'profissionais/add_profissionais.html'
     context = {}
@@ -29,6 +30,7 @@ def list_profissionais(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def edit_profissionais(request, id_profissionais):
     template_name = 'profissionais/add_profissionais.html'
     context ={}
@@ -42,6 +44,7 @@ def edit_profissionais(request, id_profissionais):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def delete_profissionais(request, id_profissionais):
     profissionais = Profissionais.objects.get(id=id_profissionais)
     profissionais.delete()

@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import MateriaisForm
 from .models import Materiais
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/contas/login/')
 def add_materiais(request):
     template_name = 'materiais/add_materiais.html'
     context = {}
@@ -26,6 +28,7 @@ def list_materiais(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def edit_materiais(request, id_materiais):
     template_name = 'materiais/add_materiais.html'
     context ={}
@@ -39,6 +42,7 @@ def edit_materiais(request, id_materiais):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def delete_materiais(request, id_materiais):
     materiais = Materiais.objects.get(id=id_materiais)
     materiais.delete()
