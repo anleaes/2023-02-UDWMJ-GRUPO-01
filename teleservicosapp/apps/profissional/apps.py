@@ -4,3 +4,4 @@ from django.apps import AppConfig
 class ProfissionalConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'profissional'
+    verbose_name = 'Profissional'
