@@ -4,3 +4,6 @@ apps/core/__pycache__/*
 apps/categories/__pycache__/*
 apps/clients/__pycache__/*
 apps/orders/__pycache__/*
+apps/profissionais/__pycache__/*
+apps/products/__pycache__/*
+apps/materiais/__pycache__/*
